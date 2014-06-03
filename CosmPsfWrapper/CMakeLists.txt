@@ -80,7 +80,7 @@ swig_add_module(CosmPsfJavaSwig java CosmPsfWrapper.i "CosmPsfWrapper.cpp")
 FILE(GLOB JAVA_SOURCE ${CMAKE_SWIG_OUTDIR}/*.java)
 set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.6" "-target" "1.6")
 # make the jar wrapper
-add_jar(CosmPsfJavaWrapper ${JAVA_SOURCE} OUTPUT_DIR ${JAR_PATH})
+add_jar(CosmPsfJavaWrapper ${JAVA_SOURCE})
 
 add_dependencies(CosmPsfJavaWrapper CosmPsfJavaSwig)
 

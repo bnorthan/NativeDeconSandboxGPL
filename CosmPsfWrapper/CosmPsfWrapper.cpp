@@ -1,7 +1,4 @@
 #include <iostream>
-
-#include "com_truenorth_functions_psf_PsfGenerator.h"
-
 #include <complex>
 
 using std::complex;
