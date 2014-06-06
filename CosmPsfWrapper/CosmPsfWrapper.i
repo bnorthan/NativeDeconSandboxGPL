@@ -1,9 +1,9 @@
 %module CosmPsf_swig
 %include arrays_java.i
 %apply float[] {float *};
-%apply long[] {long *};
+%apply int[] {int *};
 %{
-extern int CosmPsf(float * array, long* size, float* spacing,
+extern int CosmPsf(float * array, int* size, float* spacing,
 		  double emissionWavelength,
 		  double numericalAperture,
 		  double designImmersionOilRefractiveIndex,
@@ -15,7 +15,7 @@ extern int CosmPsf(float * array, long* size, float* spacing,
 		  int model);
 %}
 
-extern int CosmPsf(float * array, long* size, float* spacing,
+extern int CosmPsf(float * array, int* size, float* spacing,
 		  double emissionWavelength,
 		  double numericalAperture,
 		  double designImmersionOilRefractiveIndex,

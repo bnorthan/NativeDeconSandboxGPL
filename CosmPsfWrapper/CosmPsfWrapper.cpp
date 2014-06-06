@@ -7,9 +7,22 @@ using std::complex;
 #include "psf/functor.h"
 #include "psf/gibsonLaniPsfFunctor.h"
 
+
+extern "C" int CosmPsf
+  (float * array, int* size, float* spacing,
+		  double emissionWavelength,
+		  double numericalAperture,
+		  double designImmersionOilRefractiveIndex,
+		  double designSpecimenLayerRefractiveIndex,
+		  double actualImmersionOilRefractiveIndex,
+		  double actualSpecimenLayerRefractiveIndex,
+		  double actualPointSourceDepthInSpecimenLayer,
+		  int type,
+		  int model);
+
 // JNI wrapper to call cosm psf generation
-int CosmPSf
-  (float * array, long* size, float* spacing,
+int CosmPsf
+  (float * array, int* size, float* spacing,
 		  double emissionWavelength,
 		  double numericalAperture,
 		  double designImmersionOilRefractiveIndex,
