@@ -1,18 +1,6 @@
 # this project is used to wrap cosm psf code
 project(CosmPsfWrapperProject)
 
-# Find Swig
-FIND_PACKAGE(SWIG REQUIRED)
-INCLUDE(${SWIG_USE_FILE})
-
-# Find JNI
-find_package(JNI REQUIRED)
-include_directories(${JNI_INCLUDE_DIRS})
-
-# Find Java
-find_package(Java REQUIRED)
-INCLUDE(UseJava)
-
 # Find Cosm
 # FIND_PATH( COSM_PATH $ENV{COSM_DIR} [DOC "Cosm directory"] )
 set (COSM_PATH "../COSM-0.7.4-Source")
@@ -67,26 +55,4 @@ SET(PSF_LIB_SRCS ${PSF_SRC}/dqagFunction
 # add the cosm wrapper library
 add_library(CosmPsfWrapper SHARED ${PSF_LIB_SRCS} ${QUADPACK_SRC} CosmPsfWrapper)
 
-# tell swig to put the .java files into javasrc directory
-set(CMAKE_SWIG_OUTDIR ${CMAKE_CURRENT_BINARY_DIR}/javasrc)
-
-# tell swig to use com.deconware.wrappers namespace
-SET(CMAKE_SWIG_FLAGS -package com.deconware.wrappers)
-
-# add the swig java wrapper module
-
-swig_add_module(CosmPsfJavaSwig java CosmPsfWrapper.i "CosmPsfWrapper.cpp" ${PSF_LIB_SRCS} ${QUADPACK_SRC})
-#swig_link_libraries(CosmPsfJavaSwig ${PSF_LIB_SRCS} ${QUADPACK_SRC})
-
-# glob all the java files
-FILE(GLOB JAVA_SOURCE ${CMAKE_SWIG_OUTDIR}/*.java)
-set(CMAKE_JAVA_COMPILE_FLAGS "-source" "1.6" "-target" "1.6")
-# make the jar wrapper
-add_jar(CosmPsfJavaWrapper ${JAVA_SOURCE} VERSION 1.0)
-
-add_dependencies(CosmPsfJavaWrapper CosmPsfJavaSwig)
-
-set(LIB_PATH ${CMAKE_CURRENT_BINARY_DIR}/lib)
-
-INSTALL(TARGETS CosmPsfWrapper CosmPsfJavaSwig DESTINATION ${LIB_PATH})
 
